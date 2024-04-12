@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -71,5 +74,30 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.maps.android:maps-compose:2.14.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1")
+
+    // Coroutine Lifecycle Scopes
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    //Dagger - Hilt
+    implementation ("com.google.dagger:hilt-android:2.49")
+    //May need okkhttp also
+
+    // Dagger - Hilt
+    kapt ("com.google.dagger:hilt-android-compiler:2.49")
+//    implementation (libs.androidx.hilt.lifecycle.viewmodel) //DON'T EVER ADD THIS
+    kapt ("androidx.hilt:hilt-compiler:1.2.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    //GSON converter
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
 }
