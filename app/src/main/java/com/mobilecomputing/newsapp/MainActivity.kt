@@ -19,6 +19,7 @@ import com.mobilecomputing.newsapp.locationupdates.LocationUpdates
 import com.mobilecomputing.newsapp.screens.locations.LocationHome
 //import com.mobilecomputing.newsapp.screens.LocationHome
 import com.mobilecomputing.newsapp.screens.locations.LocationScreen
+import com.mobilecomputing.newsapp.screens.news.NewsHome
 import com.mobilecomputing.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,7 +70,10 @@ class MainActivity : ComponentActivity() {
                     Log.d("CompletedCoordinates", "coordinates: $currentLocation")
                     if(currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
                         LocationHome(currentLocation.latitude.toString(), currentLocation.longitude.toString())
+
+                        NewsHome()
                     }
+
                 }
             }
         }
