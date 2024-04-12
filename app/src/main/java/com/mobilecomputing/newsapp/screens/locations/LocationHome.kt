@@ -1,4 +1,4 @@
-package com.mobilecomputing.newsapp.screens
+package com.mobilecomputing.newsapp.screens.locations
 
 import android.util.Log
 import androidx.compose.material3.CircularProgressIndicator

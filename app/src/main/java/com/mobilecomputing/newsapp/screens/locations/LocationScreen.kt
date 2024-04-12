@@ -1,4 +1,4 @@
-package com.mobilecomputing.newsapp.screens
+package com.mobilecomputing.newsapp.screens.locations
 
 import android.content.Context
 import android.content.pm.PackageManager

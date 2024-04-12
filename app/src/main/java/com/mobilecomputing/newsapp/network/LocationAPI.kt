@@ -1,9 +1,8 @@
 package com.mobilecomputing.newsapp.network
 
-import com.mobilecomputing.newsapp.model.LocationData
+import com.mobilecomputing.newsapp.model.locations.LocationData
 import com.mobilecomputing.newsapp.utils.Constants.API_KEY
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Singleton
 

@@ -1,11 +1,9 @@
 package com.mobilecomputing.newsapp.repository
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import com.mobilecomputing.newsapp.data.DataOrException
-import com.mobilecomputing.newsapp.model.LocationDataItem
+import com.mobilecomputing.newsapp.model.locations.LocationDataItem
 import com.mobilecomputing.newsapp.network.LocationAPI
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 class LocationRepository @Inject constructor(private val api: LocationAPI) {

@@ -1,11 +1,11 @@
-package com.mobilecomputing.newsapp.screens
+package com.mobilecomputing.newsapp.screens.locations
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilecomputing.newsapp.data.DataOrException
-import com.mobilecomputing.newsapp.model.LocationDataItem
+import com.mobilecomputing.newsapp.model.locations.LocationDataItem
 import com.mobilecomputing.newsapp.repository.LocationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

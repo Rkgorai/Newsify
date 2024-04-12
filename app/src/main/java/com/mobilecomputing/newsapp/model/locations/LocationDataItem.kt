@@ -1,4 +1,4 @@
-package com.mobilecomputing.newsapp.model
+package com.mobilecomputing.newsapp.model.locations
 
 data class LocationDataItem(
     val country: String,
