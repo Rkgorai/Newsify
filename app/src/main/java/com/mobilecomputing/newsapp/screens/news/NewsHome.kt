@@ -8,24 +8,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobilecomputing.newsapp.model.news.Article
+import com.mobilecomputing.newsapp.utils.Constants.isTopHeadline
 
 
 @Composable
 fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
     // Display the news data
     DisplayNewsData(viewModel)
-    viewModel.getNewsData(false, "delhi", "in", "general", "publishedAt")
+    viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
 }
 
 @Composable
@@ -53,17 +57,37 @@ fun ArticleItem(article: Article) {
 fun DisplayNewsData(viewModel: NewsViewModel) {
     val articles = viewModel.data.value.data?.articles?.toMutableList()
 
-    if(viewModel.data.value.loading == true) {
-        CircularProgressIndicator()
-        Log.d("LOADING", "DisplayNewsData: Loading")
-    }
-    else {
-        LazyColumn {
-            items(articles ?: listOf()) { article ->
-                ArticleItem(article)
+//    val isTopHeadline = remember {
+//        mutableStateOf(false)
+//    }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+
+        Button(onClick = {
+            isTopHeadline.value = !isTopHeadline.value
+//            viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
+        }) {
+            if (isTopHeadline.value) {
+                Text("Show Everything")
+            } else {
+                Text("Show Top Headlines")
             }
         }
-        Log.d("RESULT", "DisplayNewsData: $articles")
+//        viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
+
+        if(viewModel.data.value.loading == true) {
+            CircularProgressIndicator()
+            Log.d("LOADING", "DisplayNewsData: Loading")
+        }
+        else {
+            LazyColumn {
+                items(articles ?: listOf()) { article ->
+                    ArticleItem(article)
+                }
+            }
+            Log.d("RESULT", "DisplayNewsData: $articles")
+        }
     }
+
 }
 

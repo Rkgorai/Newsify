@@ -1,5 +1,8 @@
 package com.mobilecomputing.newsapp.utils
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
 object Constants {
     // https://api.openweathermap.org/geo/1.0/reverse?lat=28.5439841&lon=77.2724624&limit=5
 //      &appid=0d05b7f83c770898b89f033ae07be9fd
@@ -20,4 +23,7 @@ object Constants {
     const val NEWS_BASE_URL = "https://newsapi.org/v2/"
 //    const val NEWS_API_KEY = "943ce6b7bb7442d2856a0a335043f422"
 const val NEWS_API_KEY= "2b859da6065945fa993fc49d86e68580"
+
+
+    val isTopHeadline = mutableStateOf(false)
 }
