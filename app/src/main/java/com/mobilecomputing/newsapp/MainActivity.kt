@@ -68,7 +68,6 @@ class MainActivity : ComponentActivity() {
                     LocationScreen(this@MainActivity ,currentLocation, locationUpdates)
                     Log.d("CompletedCoordinates", "coordinates: $currentLocation")
                     if(currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
-//                        Text(text = "NAYA TEXT")
                         LocationHome(currentLocation.latitude.toString(), currentLocation.longitude.toString())
                     }
                 }
@@ -76,8 +75,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-//@Composable
-//fun LocationHome(viewModel: LocationViewModel) {
-//
-//}
