@@ -1,6 +1,5 @@
 package com.mobilecomputing.newsapp.screens.news
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -15,8 +14,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,7 +26,6 @@ import com.mobilecomputing.newsapp.utils.Constants.isTopHeadline
 fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
     // Display the news data
     DisplayNewsData(viewModel)
-    viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
 }
 
 @Composable
@@ -55,39 +51,31 @@ fun ArticleItem(article: Article) {
 
 @Composable
 fun DisplayNewsData(viewModel: NewsViewModel) {
-    val articles = viewModel.data.value.data?.articles?.toMutableList()
-
-//    val isTopHeadline = remember {
-//        mutableStateOf(false)
-//    }
 
     Column(modifier = Modifier.padding(16.dp)) {
-
-        Button(onClick = {
-            isTopHeadline.value = !isTopHeadline.value
-//            viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
-        }) {
+        Button(onClick = { isTopHeadline.value = !isTopHeadline.value }) {
             if (isTopHeadline.value) {
                 Text("Show Everything")
             } else {
                 Text("Show Top Headlines")
             }
         }
-//        viewModel.getNewsData(isTopHeadline.value, "delhi", "in", "general", "publishedAt")
 
         if(viewModel.data.value.loading == true) {
             CircularProgressIndicator()
-            Log.d("LOADING", "DisplayNewsData: Loading")
-        }
-        else {
+        } else {
+            if (isTopHeadline.value) {
+                Text("Top Headlines")
+            } else {
+                Text("Everything")
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
             LazyColumn {
-                items(articles ?: listOf()) { article ->
+                items(if (isTopHeadline.value) viewModel.topHeadlineArticles.value else viewModel.everythingArticles.value) { article ->
                     ArticleItem(article)
                 }
             }
-            Log.d("RESULT", "DisplayNewsData: $articles")
         }
     }
-
 }
-
