@@ -4,8 +4,8 @@ import com.mobilecomputing.newsapp.network.LocationAPI
 import com.mobilecomputing.newsapp.network.NewsAPI
 import com.mobilecomputing.newsapp.repository.LocationRepository
 import com.mobilecomputing.newsapp.repository.NewsRepository
-import com.mobilecomputing.newsapp.utils.Constants.Location_BASE_URL
-import com.mobilecomputing.newsapp.utils.Constants.NEWS_BASE_URL
+import com.mobilecomputing.newsapp.utils.Constant.Location_BASE_URL
+import com.mobilecomputing.newsapp.utils.Constant.NEWS_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

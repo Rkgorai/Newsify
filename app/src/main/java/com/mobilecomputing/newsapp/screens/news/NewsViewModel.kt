@@ -8,6 +8,7 @@ import com.mobilecomputing.newsapp.data.DataOrException
 import com.mobilecomputing.newsapp.model.news.Article
 import com.mobilecomputing.newsapp.model.news.NewsData
 import com.mobilecomputing.newsapp.repository.NewsRepository
+import com.mobilecomputing.newsapp.utils.Constant.state_location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,8 +24,10 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
     var everythingArticles  = mutableStateOf(listOf<Article>())
 
     init {
-        getNewsData(true, "delhi", "in", "general", "publishedAt")
-        getNewsData(false, "delhi", "in", "general", "publishedAt")
+
+        getNewsData(true, state_location.value, "in", "general", "publishedAt")
+        getNewsData(false, state_location.value, "in", "general", "publishedAt")
+
     }
 
     fun getNewsData(isTopHeadline: Boolean, q: String, country: String, category: String, sortBy: String) {

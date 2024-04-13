@@ -1,9 +1,8 @@
 package com.mobilecomputing.newsapp.utils
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 
-object Constants {
+object Constant {
     // https://api.openweathermap.org/geo/1.0/reverse?lat=28.5439841&lon=77.2724624&limit=5
 //      &appid=0d05b7f83c770898b89f033ae07be9fd
     const val Location_BASE_URL = "https://api.openweathermap.org/geo/1.0/"
@@ -26,4 +25,6 @@ object Constants {
 
 
     val isTopHeadline = mutableStateOf(false)
+
+    val state_location = mutableStateOf("")
 }
