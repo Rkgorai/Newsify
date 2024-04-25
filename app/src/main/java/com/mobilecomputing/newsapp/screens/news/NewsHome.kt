@@ -22,117 +22,65 @@ import com.mobilecomputing.newsapp.model.news.Article
 import com.mobilecomputing.newsapp.utils.Constant.newsType
 
 
-//@Composable
-//fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
-//    // Display the news data
-//    DisplayNewsData(viewModel)
-//}
-
-//@Composable
-//fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
-//    val newsTypes = listOf("general", "entertainment", "health", "science", "sports", "technology")
-//    val selectedTab = remember { mutableStateOf(newsTypes[0]) }
-//
-//    TabRow(selectedTabIndex = newsTypes.indexOf(selectedTab.value)) {
-//        newsTypes.forEach { newsType ->
-//            Tab(
-//                selected = selectedTab.value == newsType,
-//                onClick = {
-//                    selectedTab.value = newsType
-////                    newsType.value = newsType
-//                }
-//            ) {
-//                Text(text = newsType.capitalize())
-//            }
-//        }
-//    }
-//
-//    // Display the news data
-//    DisplayNewsData(viewModel, selectedTab.value)
-//}
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Alignment
 
+
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+
+@Preview
 @Composable
-fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
+fun NewsHome() {
     val newsTypes = listOf("everything","general", "entertainment", "health", "science", "sports", "technology")
     val selectedTab = remember { mutableStateOf(newsTypes[0]) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column() {
 
-            TabRow(selectedTabIndex = newsTypes.indexOf(selectedTab.value), modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            ScrollableTabRow(
+                selectedTabIndex = newsTypes.indexOf(selectedTab.value),
+                modifier = Modifier.fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top=32.dp)
+            ) {
                 newsTypes.forEach { newsType ->
                     Tab(
+                        modifier = Modifier.padding(horizontal = 12.dp),
                         selected = selectedTab.value == newsType,
                         onClick = {
                             selectedTab.value = newsType
                         }
                     ) {
-                        Text(text = newsType.capitalize())
+                        Text(
+                            text = newsType.toUpperCase(),
+                            modifier = Modifier.padding(8.dp),
+                            fontSize = 20.sp
+                        )
                     }
                 }
             }
 
-            Text(selectedTab.value.capitalize())
-            Spacer(modifier = Modifier.height(16.dp))
-
             // Display the news data
-            DisplayNewsData(viewModel, selectedTab.value)
+            DisplayNewsData(selectedTab.value)
         }
     }
-
 }
 
-//
-//@Composable
-//fun DisplayNewsData(viewModel: NewsViewModel, news: String) {
-//
-//    Column(modifier = Modifier.padding(16.dp)) {
-//        Button(onClick = {
-//            if(newsType.value == "everything") {
-//                newsType.value = "top-headlines"
-//            } else {
-//                newsType.value = "everything"
-//            }
-////            newsType.value = !newsType.value
-//        }) {
-//            if (newsType.value == "everything") {
-//                Text("Show Everything")
-//            } else {
-//                Text("Show Top Headlines")
-//            }
-//        }
-//
-//        if (viewModel.data.value.loading == true) {
-//            CircularProgressIndicator()
-//        } else {
-//            if (newsType.value == "top-headlines") {
-//                Text("Top Headlines")
-//            } else {
-//                Text("Everything")
-//            }
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            LazyColumn {
-//                items(if (newsType.value=="everything") viewModel.topHeadlineArticlesGeneral.value else viewModel.localNewsArticles.value) { article ->
-//                    ArticleItem(article)
-//                }
-//            }
-//        }
-//    }
-//}
-
 @Composable
-fun DisplayNewsData(viewModel: NewsViewModel, news: String) {
+fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
     Column(modifier = Modifier.padding(16.dp)) {
         if (viewModel.data.value.loading == true) {
             CircularProgressIndicator()
         } else {
-//            Text(news.capitalize())
-//            Spacer(modifier = Modifier.height(16.dp))
+            Text(news.capitalize())
+            Spacer(modifier = Modifier.height(16.dp))
 
             LazyColumn {
                 items(getArticlesByNewsType(viewModel, news)) { article ->
