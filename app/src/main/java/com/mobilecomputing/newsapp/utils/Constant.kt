@@ -24,7 +24,7 @@ object Constant {
     const val NEWS_API_KEY= "2b859da6065945fa993fc49d86e68580"
 
 
-    val isTopHeadline = mutableStateOf(false)
+    val newsType = mutableStateOf("everything")
 
     val state_location = mutableStateOf("")
 }
