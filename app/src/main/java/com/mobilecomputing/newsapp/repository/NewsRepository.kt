@@ -13,7 +13,7 @@ class NewsRepository @Inject constructor(private val api: NewsAPI) {
         try {
             dataOrException.loading = true
             if (isTopHeadline) {
-                dataOrException.data = api.getTopHeadlines(q, category, country, sortBy)
+                dataOrException.data = api.getTopHeadlines(category, country, sortBy)
             } else {
                 dataOrException.data = api.getEverything(q, sortBy)
             }

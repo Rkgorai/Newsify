@@ -12,7 +12,7 @@ interface NewsAPI {
 
     @GET("top-headlines?apiKey=${NEWS_API_KEY}")
     suspend fun getTopHeadlines(
-        @Query("q") query: String = "Delhi",
+//        @Query("q") query: String = "Delhi",
         @Query("category") category: String = "general",
         @Query("country") country: String = "in",
         @Query("sortBy") sortBy: String = "publishedAt"
