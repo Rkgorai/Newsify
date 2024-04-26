@@ -20,13 +20,23 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
     val data : MutableState<DataOrException<NewsData, Boolean, Exception>> =
         mutableStateOf(DataOrException(null, true, Exception("")))
 
-    var topHeadlineArticles = mutableStateOf(listOf<Article>())
-    var everythingArticles  = mutableStateOf(listOf<Article>())
+    var localNewsArticles  = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesGeneral = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesEntertainment = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesHealth = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesScience = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesSports = mutableStateOf(listOf<Article>())
+    var topHeadlineArticlesTechnology = mutableStateOf(listOf<Article>())
 
     init {
 
         getNewsData(true, state_location.value, "in", "general", "publishedAt")
         getNewsData(false, state_location.value, "in", "general", "publishedAt")
+        getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
+        getNewsData(true, state_location.value, "in", "health", "publishedAt")
+        getNewsData(true, state_location.value, "in", "science", "publishedAt")
+        getNewsData(true, state_location.value, "in", "sports", "publishedAt")
+        getNewsData(true, state_location.value, "in", "technology", "publishedAt")
 
     }
 
@@ -41,9 +51,18 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
 
             // Assign the articles to the correct list after the data has been fetched
             if (isTopHeadline) {
-                topHeadlineArticles.value = data.value.data?.articles ?: listOf()
+                when(category) {
+                    "general" -> topHeadlineArticlesGeneral.value = data.value.data?.articles ?: listOf()
+                    "entertainment" -> topHeadlineArticlesEntertainment.value = data.value.data?.articles ?: listOf()
+                    "health" -> topHeadlineArticlesHealth.value = data.value.data?.articles ?: listOf()
+                    "science" -> topHeadlineArticlesScience.value = data.value.data?.articles ?: listOf()
+                    "sports" -> topHeadlineArticlesSports.value = data.value.data?.articles ?: listOf()
+                    "technology" -> topHeadlineArticlesTechnology.value = data.value.data?.articles ?: listOf()
+                    else -> {} // Handle the case where category does not match any of the above
+                }
+//                topHeadlineArticlesGeneral.value = data.value.data?.articles ?: listOf()
             } else {
-                everythingArticles.value = data.value.data?.articles ?: listOf()
+                localNewsArticles.value = data.value.data?.articles ?: listOf()
             }
         }
     }
