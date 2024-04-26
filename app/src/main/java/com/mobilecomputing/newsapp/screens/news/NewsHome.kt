@@ -92,15 +92,6 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
         }
 
     }
-//    when(news) {
-//        "everything" -> viewModel.getNewsData(false, state_location.value, "in", "general", "publishedAt")
-//        "general" -> viewModel.getNewsData(true, state_location.value, "in", "general", "publishedAt")
-//        "entertainment" -> viewModel.getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
-//        "health" -> viewModel.getNewsData(true, state_location.value, "in", "health", "publishedAt")
-//        "science" -> viewModel.getNewsData(true, state_location.value, "in", "science", "publishedAt")
-//        "sports" -> viewModel.getNewsData(true, state_location.value, "in", "sports", "publishedAt")
-//        "technology" -> viewModel.getNewsData(true, state_location.value, "in", "technology", "publishedAt")
-//    }
 
     Column(modifier = Modifier.padding(16.dp)) {
         if (viewModel.data.value.loading == true) {
