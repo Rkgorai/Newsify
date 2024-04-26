@@ -32,7 +32,7 @@ fun ArticleItem(article: Article) {
             Text(text = "Source: ${article.source.name}", fontSize = 14.sp)
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Description: ${article.description}",
+                text = "Description: ${article.content}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

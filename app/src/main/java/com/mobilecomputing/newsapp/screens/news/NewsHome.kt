@@ -1,5 +1,6 @@
 package com.mobilecomputing.newsapp.screens.news
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -34,10 +35,11 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-@Preview
+//@Preview
 @Composable
-fun NewsHome() {
+fun NewsHome(navController: NavController) {
     val newsTypes = listOf("everything","general", "entertainment", "health", "science", "sports", "technology")
     val selectedTab = remember { mutableStateOf(newsTypes[0]) }
 
@@ -68,13 +70,13 @@ fun NewsHome() {
             }
 
             // Display the news data
-            DisplayNewsData(selectedTab.value)
+            DisplayNewsData(selectedTab.value, navController = navController)
         }
     }
 }
 
 @Composable
-fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
+fun DisplayNewsData(news: String, navController: NavController ,viewModel: NewsViewModel=hiltViewModel()) {
     Column(modifier = Modifier.padding(16.dp)) {
         if (viewModel.data.value.loading == true) {
             CircularProgressIndicator()
@@ -84,7 +86,12 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
 
             LazyColumn {
                 items(getArticlesByNewsType(viewModel, news)) { article ->
-                    ArticleItem(article)
+                    Box(modifier = Modifier.clickable {
+
+                        navController.navigate("detail/${article.title}")
+                    }) {
+                        ArticleItem(article)
+                    }
                 }
             }
         }

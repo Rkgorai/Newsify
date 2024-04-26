@@ -1,5 +1,6 @@
 package com.mobilecomputing.newsapp.screens.news
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -66,4 +67,27 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
             }
         }
     }
+
+    fun getArticleById(id: String): Article? {
+        val allArticles = listOf(
+            *localNewsArticles.value.toTypedArray(),
+            *topHeadlineArticlesGeneral.value.toTypedArray(),
+            *topHeadlineArticlesEntertainment.value.toTypedArray(),
+            *topHeadlineArticlesHealth.value.toTypedArray(),
+            *topHeadlineArticlesScience.value.toTypedArray(),
+            *topHeadlineArticlesSports.value.toTypedArray(),
+            *topHeadlineArticlesTechnology.value.toTypedArray()
+        )
+
+        val article = allArticles.find { it.title == id }
+        if (article == null) {
+            Log.d("NewsViewModel", "No article found with id: $id")
+        } else {
+            Log.d("NewsViewModel", "Found article with id: $id")
+        }
+
+        return article
+    }
+
+
 }
