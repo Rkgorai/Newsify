@@ -28,17 +28,7 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
     var topHeadlineArticlesSports = mutableStateOf(listOf<Article>())
     var topHeadlineArticlesTechnology = mutableStateOf(listOf<Article>())
 
-    init {
-
-        getNewsData(true, state_location.value, "in", "general", "publishedAt")
-        getNewsData(false, state_location.value, "in", "general", "publishedAt")
-        getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
-        getNewsData(true, state_location.value, "in", "health", "publishedAt")
-        getNewsData(true, state_location.value, "in", "science", "publishedAt")
-        getNewsData(true, state_location.value, "in", "sports", "publishedAt")
-        getNewsData(true, state_location.value, "in", "technology", "publishedAt")
-
-    }
+    init {}
 
     fun getNewsData(isTopHeadline: Boolean, q: String, country: String, category: String, sortBy: String) {
         // Call the repository to get the data

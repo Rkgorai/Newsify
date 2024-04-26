@@ -31,9 +31,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.mobilecomputing.newsapp.utils.Constant.state_location
 
 @Preview
 @Composable
@@ -46,9 +48,10 @@ fun NewsHome() {
 
             ScrollableTabRow(
                 selectedTabIndex = newsTypes.indexOf(selectedTab.value),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)
-                    .padding(top=32.dp)
+                    .padding(top = 32.dp)
             ) {
                 newsTypes.forEach { newsType ->
                     Tab(
@@ -75,6 +78,21 @@ fun NewsHome() {
 
 @Composable
 fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
+
+    // Call the getNewsData function based on the news type
+    LaunchedEffect(key1 = news) {
+        when(news) {
+            "everything" -> viewModel.getNewsData(false, state_location.value, "in", "general", "publishedAt")
+            "general" -> viewModel.getNewsData(true, state_location.value, "in", "general", "publishedAt")
+            "entertainment" -> viewModel.getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
+            "health" -> viewModel.getNewsData(true, state_location.value, "in", "health", "publishedAt")
+            "science" -> viewModel.getNewsData(true, state_location.value, "in", "science", "publishedAt")
+            "sports" -> viewModel.getNewsData(true, state_location.value, "in", "sports", "publishedAt")
+            "technology" -> viewModel.getNewsData(true, state_location.value, "in", "technology", "publishedAt")
+        }
+
+    }
+
     Column(modifier = Modifier.padding(16.dp)) {
         if (viewModel.data.value.loading == true) {
             CircularProgressIndicator()

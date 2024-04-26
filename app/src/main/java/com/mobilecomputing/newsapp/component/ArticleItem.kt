@@ -3,6 +3,7 @@ package com.mobilecomputing.newsapp.component
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +34,9 @@ fun ArticleItem(article: Article) {
         Column(modifier = Modifier.padding(16.dp)) {
             // Add the image here
             AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
                 model = article.urlToImage ?: "",
                 placeholder = painterResource(id = R.drawable.sudoimage),
                 error = painterResource(id = R.drawable.sudoimage),
