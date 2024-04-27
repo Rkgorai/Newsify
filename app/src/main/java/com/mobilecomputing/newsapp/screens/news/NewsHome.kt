@@ -1,5 +1,9 @@
 package com.mobilecomputing.newsapp.screens.news
 
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -32,9 +36,11 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.mobilecomputing.newsapp.SecondMainActivity
 import com.mobilecomputing.newsapp.utils.Constant.state_location
 
 @Preview
@@ -78,6 +84,12 @@ fun NewsHome() {
 
 @Composable
 fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
+    val context = LocalContext.current // Get the current context
+
+    val startActivityLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+        // Handle the result of the activity here
+    }
+
 
     // Call the getNewsData function based on the news type
     LaunchedEffect(key1 = news) {
@@ -102,9 +114,33 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
 
             LazyColumn {
                 items(getArticlesByNewsType(viewModel, news)) { article ->
-                    ArticleItem(article)
+                    Box(modifier = Modifier.clickable {
+                        // Create an Intent to start the new activity
+                        val intent = Intent(context, SecondMainActivity::class.java)
+
+                        intent.putExtra("title", article.title)
+                        intent.putExtra("author", article.author)
+                        intent.putExtra("publishedAt", article.publishedAt)
+                        intent.putExtra("source", article.source.name)
+                        intent.putExtra("url", article.url)
+                        intent.putExtra("urlToImage", article.urlToImage)
+                        intent.putExtra("content", article.content)
+                        intent.putExtra("description", article.description)
+                        // Use the launcher to start the activity
+                        startActivityLauncher.launch(intent)
+                    }){
+                        ArticleItem(article)
+                    }
                 }
             }
+//
+//            LazyColumn {
+//                items(getArticlesByNewsType(viewModel, news)) { article ->
+//                    Box(modifier = Modifier.clickable { }){
+//                        ArticleItem(article)
+//                    }
+//                }
+//            }
         }
     }
 }
