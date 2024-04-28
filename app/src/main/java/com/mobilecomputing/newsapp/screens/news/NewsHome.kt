@@ -133,14 +133,6 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
                     }
                 }
             }
-//
-//            LazyColumn {
-//                items(getArticlesByNewsType(viewModel, news)) { article ->
-//                    Box(modifier = Modifier.clickable { }){
-//                        ArticleItem(article)
-//                    }
-//                }
-//            }
         }
     }
 }
