@@ -29,23 +29,6 @@ class SecondMainActivity : ComponentActivity() {
         }
     }
 }
-//
-//@Composable
-//fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parameter
-//    val title = intent.getStringExtra("title")
-//    val content = intent.getStringExtra("content")
-//    val description = intent.getStringExtra("description")
-//    val author = intent.getStringExtra("author")
-//    val url = intent.getStringExtra("url")
-//    val urlToImage = intent.getStringExtra("urlToImage")
-//    val publishedAt = intent.getStringExtra("publishedAt")
-//    val source = intent.getStringExtra("source")
-//
-//    PageArticleItem(title, content, description, author, url, urlToImage, publishedAt, source)
-//
-//
-//
-//}
 
 
 @Composable
@@ -78,7 +61,6 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
             val urlToImage = intent.getStringExtra("urlToImage")
             val publishedAt = intent.getStringExtra("publishedAt")
             val source = intent.getStringExtra("source")
-            val context = LocalContext.current
 
             PageArticleItem(title, content, description, author, url, urlToImage, publishedAt, source, context)
         }

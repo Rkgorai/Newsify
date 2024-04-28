@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import com.mobilecomputing.newsapp.R
+import com.mobilecomputing.newsapp.WebViewActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -101,7 +102,9 @@ fun PageArticleItem(
             onClick = { offset ->
                 annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset)
                     .firstOrNull()?.let { annotation ->
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(annotation.item))
+                        val intent = Intent(context, WebViewActivity::class.java).apply {
+                            putExtra("url", annotation.item)
+                        }
                         ContextCompat.startActivity(context, intent, null)
                     }
             },
