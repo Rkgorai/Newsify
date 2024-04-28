@@ -6,25 +6,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import com.mobilecomputing.newsapp.component.PageArticleItem
-import com.mobilecomputing.newsapp.model.news.Article
 
 class SecondMainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +78,9 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
             val urlToImage = intent.getStringExtra("urlToImage")
             val publishedAt = intent.getStringExtra("publishedAt")
             val source = intent.getStringExtra("source")
+            val context = LocalContext.current
 
-            PageArticleItem(title, content, description, author, url, urlToImage, publishedAt, source)
+            PageArticleItem(title, content, description, author, url, urlToImage, publishedAt, source, context)
         }
     }
 
