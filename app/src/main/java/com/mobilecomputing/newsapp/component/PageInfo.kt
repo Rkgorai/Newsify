@@ -54,16 +54,17 @@ fun PageArticleItem(
             .verticalScroll(scrollState)
     ) {
         // Add the image here
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            model = urlToImage ?: "",
-            placeholder = painterResource(id = R.drawable.sudoimage),
-            error = painterResource(id = R.drawable.sudoimage),
-            contentDescription = "The delasign logo",
-        )
+//        AsyncImage(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(200.dp),
+//            model = urlToImage ?: "",
+//            placeholder = painterResource(id = R.drawable.sudoimage),
+//            error = painterResource(id = R.drawable.sudoimage),
+//            contentDescription = "The delasign logo",
+//        )
         Spacer(modifier = Modifier.height(8.dp))
+
         Text(text = title ?: "", style = MaterialTheme.typography.headlineLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
