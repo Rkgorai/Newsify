@@ -48,16 +48,8 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
         activity?.finish()
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text(text = "") },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
-                //elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
 
-            )
 
-        }
-    ) {
 
         Column {
 
@@ -90,7 +82,6 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
             }
         }
     }
-}
 
 
 
