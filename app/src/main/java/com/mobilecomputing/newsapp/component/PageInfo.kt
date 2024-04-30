@@ -153,17 +153,34 @@ fun ArticleItemPage(
                   //Spacer(modifier = Modifier.height(8.dp))
               }
           }
-          Spacer(modifier = Modifier.height(8.dp))
+          Spacer(modifier = Modifier.height(16.dp))
 
-          Text(text = "Description:", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
-          Text(text ="$description", fontSize = 18.sp)
+          Text(
+              text = "Description:",
+              style = TextStyle(
+                  fontSize = 20.sp,
+                  fontWeight = FontWeight.Bold
+              )
+          )
+          Text(text ="$description", fontSize = 18.sp,
+              lineHeight = 30.sp, // Add vertical line spacing
+              letterSpacing = 0.15.sp,
+              style = TextStyle(
+                  textAlign = TextAlign.Justify
+              ))
+
           Spacer(modifier = Modifier.height(16.dp))
             if (content != null) {
                 // Check if content contains HTML tags
                 if (!"<.*?>".toRegex().containsMatchIn(content)) {
                     Text(text = "Content:", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
 
-                    Text(text = content, fontSize = 18.sp)
+                    Text(text = content, fontSize = 18.sp,
+                        lineHeight = 30.sp, // Add vertical line spacing
+                        letterSpacing = 0.15.sp,
+                        style = TextStyle(
+                            textAlign = TextAlign.Justify
+                        ))
                 }
             }
 
