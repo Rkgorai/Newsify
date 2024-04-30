@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobilecomputing.newsapp.component.ArticleItem
 import com.mobilecomputing.newsapp.model.news.Article
-import com.mobilecomputing.newsapp.utils.Constant.newsType
 
 
 import androidx.compose.foundation.layout.Box
@@ -33,11 +30,8 @@ import androidx.compose.ui.Alignment
 
 
 import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.mobilecomputing.newsapp.SecondMainActivity
@@ -46,7 +40,7 @@ import com.mobilecomputing.newsapp.utils.Constant.state_location
 @Preview
 @Composable
 fun NewsHome() {
-    val newsTypes = listOf("everything","general", "entertainment", "health", "science", "sports", "technology")
+    val newsTypes = listOf("for you","general", "entertainment", "health", "science", "sports", "technology")
     val selectedTab = remember { mutableStateOf(newsTypes[0]) }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -57,7 +51,6 @@ fun NewsHome() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = 32.dp)
             ) {
                 newsTypes.forEach { newsType ->
                     Tab(
@@ -94,7 +87,7 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
     // Call the getNewsData function based on the news type
     LaunchedEffect(key1 = news) {
         when(news) {
-            "everything" -> viewModel.getNewsData(false, state_location.value, "in", "general", "publishedAt")
+            "for you" -> viewModel.getNewsData(false, state_location.value, "in", "general", "publishedAt")
             "general" -> viewModel.getNewsData(true, state_location.value, "in", "general", "publishedAt")
             "entertainment" -> viewModel.getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
             "health" -> viewModel.getNewsData(true, state_location.value, "in", "health", "publishedAt")
@@ -139,7 +132,7 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
 
 fun getArticlesByNewsType(viewModel: NewsViewModel, news: String): List<Article> {
     return when(news) {
-        "everything" -> viewModel.localNewsArticles.value
+        "for you" -> viewModel.localNewsArticles.value
         "general" -> viewModel.topHeadlineArticlesGeneral.value
         "entertainment" -> viewModel.topHeadlineArticlesEntertainment.value
         "health" -> viewModel.topHeadlineArticlesHealth.value
