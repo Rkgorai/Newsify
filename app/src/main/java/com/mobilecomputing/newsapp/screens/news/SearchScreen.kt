@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobilecomputing.newsapp.SecondMainActivity
@@ -31,6 +32,7 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
     val searchQuery = remember { mutableStateOf("") }
 
     val context = LocalContext.current // Get the current context
+    val focusManager = LocalFocusManager.current // Get the current focus manager
 
     val startActivityLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
         // Handle the result of the activity here
@@ -56,7 +58,8 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
             onClick = {
                 // Call the API to search for news
                 viewModel.getNewsData(isTopHeadline = false, q = searchQuery.value, country = "in", category = "general", sortBy = "publishedAt")
-                      },
+                focusManager.clearFocus() // Clear the focus
+            },
             modifier = Modifier.padding(top = 8.dp)
         ) {
             Text("Submit")
@@ -85,4 +88,3 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
         }
     }
 }
-
