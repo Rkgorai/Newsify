@@ -34,43 +34,99 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.mobilecomputing.newsapp.SecondMainActivity
 import com.mobilecomputing.newsapp.utils.Constant.state_location
 
-@Preview
+//@Composable
+//fun NewsHome() {
+//    val newsTypes = listOf("for you","general", "entertainment", "health", "science", "sports", "technology")
+//    val selectedTab = remember { mutableStateOf(newsTypes[0]) }
+//
+//    Box(modifier = Modifier.fillMaxSize()) {
+//        Column() {
+//
+//            ScrollableTabRow(
+//                selectedTabIndex = newsTypes.indexOf(selectedTab.value),
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .align(Alignment.CenterHorizontally)
+//            ) {
+//                newsTypes.forEach { newsType ->
+//                    Tab(
+//                        modifier = Modifier.padding(horizontal = 12.dp),
+//                        selected = selectedTab.value == newsType,
+//                        onClick = {
+//                            selectedTab.value = newsType
+//                        }
+//                    ) {
+//                        Text(
+//                            text = newsType.toUpperCase(),
+//                            modifier = Modifier.padding(8.dp),
+//                            fontSize = 20.sp
+//                        )
+//                    }
+//                }
+//            }
+//
+//            // Display the news data
+//            DisplayNewsData(selectedTab.value)
+//        }
+//    }
+//}
+
 @Composable
-fun NewsHome() {
+fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
     val newsTypes = listOf("for you","general", "entertainment", "health", "science", "sports", "technology")
     val selectedTab = remember { mutableStateOf(newsTypes[0]) }
+    val isRefreshing = remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Column() {
-
-            ScrollableTabRow(
-                selectedTabIndex = newsTypes.indexOf(selectedTab.value),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                newsTypes.forEach { newsType ->
-                    Tab(
-                        modifier = Modifier.padding(horizontal = 12.dp),
-                        selected = selectedTab.value == newsType,
-                        onClick = {
-                            selectedTab.value = newsType
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing = isRefreshing.value),
+            onRefresh = {
+                isRefreshing.value = true
+                // Refresh the news data based on the selected tab
+                when(selectedTab.value) {
+                    "for you" -> viewModel.getNewsData(false, state_location.value, "in", "general", "publishedAt")
+                    "general" -> viewModel.getNewsData(true, state_location.value, "in", "general", "publishedAt")
+                    "entertainment" -> viewModel.getNewsData(true, state_location.value, "in", "entertainment", "publishedAt")
+                    "health" -> viewModel.getNewsData(true, state_location.value, "in", "health", "publishedAt")
+                    "science" -> viewModel.getNewsData(true, state_location.value, "in", "science", "publishedAt")
+                    "sports" -> viewModel.getNewsData(true, state_location.value, "in", "sports", "publishedAt")
+                    "technology" -> viewModel.getNewsData(true, state_location.value, "in", "technology", "publishedAt")
+                }
+                isRefreshing.value = false
+            }
+        ) {
+            Column() {
+                ScrollableTabRow(
+                    selectedTabIndex = newsTypes.indexOf(selectedTab.value),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.CenterHorizontally)
+                ) {
+                    newsTypes.forEach { newsType ->
+                        Tab(
+                            modifier = Modifier.padding(horizontal = 12.dp),
+                            selected = selectedTab.value == newsType,
+                            onClick = {
+                                selectedTab.value = newsType
+                            }
+                        ) {
+                            Text(
+                                text = newsType.toUpperCase(),
+                                modifier = Modifier.padding(8.dp),
+                                fontSize = 20.sp
+                            )
                         }
-                    ) {
-                        Text(
-                            text = newsType.toUpperCase(),
-                            modifier = Modifier.padding(8.dp),
-                            fontSize = 20.sp
-                        )
                     }
                 }
-            }
 
-            // Display the news data
-            DisplayNewsData(selectedTab.value)
+                // Display the news data
+                DisplayNewsData(selectedTab.value)
+            }
         }
     }
 }
@@ -102,7 +158,7 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
         if (viewModel.data.value.loading == true) {
             CircularProgressIndicator()
         } else {
-            Text(news.capitalize())
+//            Text(news.capitalize())
             Spacer(modifier = Modifier.height(16.dp))
 
             LazyColumn {
