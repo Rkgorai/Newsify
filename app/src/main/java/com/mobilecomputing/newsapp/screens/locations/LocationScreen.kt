@@ -51,7 +51,7 @@ fun LocationScreen(context: Context, currentLocation: LatLng,  locationUpdates: 
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Your Location Info: ${currentLocation.latitude}, ${currentLocation.longitude}")
+            //Text(text = "Your Location Info: ${currentLocation.latitude}, ${currentLocation.longitude}")
         }
     }
 }
