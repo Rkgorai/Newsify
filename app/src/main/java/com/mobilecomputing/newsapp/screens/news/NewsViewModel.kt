@@ -28,6 +28,7 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
     var topHeadlineArticlesScience = mutableStateOf(listOf<Article>())
     var topHeadlineArticlesSports = mutableStateOf(listOf<Article>())
     var topHeadlineArticlesTechnology = mutableStateOf(listOf<Article>())
+    var searchedNewsArticles = mutableStateOf(listOf<Article>())
 
     init {}
 
@@ -53,7 +54,12 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
                 }
 //                topHeadlineArticlesGeneral.value = data.value.data?.articles ?: listOf()
             } else {
-                localNewsArticles.value = data.value.data?.articles ?: listOf()
+                if (state_location.value == q) {
+                    localNewsArticles.value = data.value.data?.articles ?: listOf()
+                } else {
+                    searchedNewsArticles.value = data.value.data?.articles ?: listOf()
+                }
+//                localNewsArticles.value = data.value.data?.articles ?: listOf()
             }
         }
     }

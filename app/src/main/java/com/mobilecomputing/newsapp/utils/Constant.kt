@@ -20,6 +20,7 @@ object Constant {
     //https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=943ce6b7bb7442d2856a0a335043f422
 
     const val NEWS_BASE_URL = "https://newsapi.org/v2/"
+
    // const val NEWS_API_KEY = "943ce6b7bb7442d2856a0a335043f422"
     const val NEWS_API_KEY= "2b859da6065945fa993fc49d86e68580"
 

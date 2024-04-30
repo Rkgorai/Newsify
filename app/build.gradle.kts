@@ -114,5 +114,9 @@ dependencies {
     implementation ("androidx.compose.runtime:runtime-livedata:1.0.5")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
+
     implementation ("io.coil-kt:coil-gif:2.1.0")
+
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
+
 }

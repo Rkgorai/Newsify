@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -37,12 +39,14 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
     val startActivityLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
         // Handle the result of the activity here
     }
-    viewModel.localNewsArticles.value = mutableListOf() // Clear the list of news articles
+    viewModel.searchedNewsArticles.value = mutableListOf() // Clear the list of news articles
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
             modifier = Modifier
@@ -60,13 +64,13 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
                 viewModel.getNewsData(isTopHeadline = false, q = searchQuery.value, country = "in", category = "general", sortBy = "publishedAt")
                 focusManager.clearFocus() // Clear the focus
             },
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
         ) {
             Text("Submit")
         }
 
         LazyColumn {
-            items(getArticlesByNewsType(viewModel, "for you")) { article ->
+            items(getArticlesByNewsType(viewModel, "search")) { article ->
                 Box(modifier = Modifier.clickable {
                     // Create an Intent to start the new activity
                     val intent = Intent(context, SecondMainActivity::class.java)

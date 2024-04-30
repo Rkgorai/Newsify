@@ -2,6 +2,7 @@ package com.mobilecomputing.newsapp.component
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,21 +30,20 @@ import com.mobilecomputing.newsapp.model.news.Article
 import java.util.*;
 import java.text.SimpleDateFormat
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.draw.clip
 
 @Composable
 fun ArticleItem(article: Article) {
 
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(8.dp),
-        elevation = CardDefaults.elevatedCardElevation(8.dp)
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+    Box() {
+        Column(modifier = Modifier.padding(8.dp)) {
             // Add the image here
+            Spacer(modifier = Modifier.height(8.dp))
             AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(200.dp)
+                ,
                 model = article.urlToImage ?: "",
                 placeholder = painterResource(id = R.drawable.sudoimage),
                 error = painterResource(id = R.drawable.sudoimage),
@@ -52,16 +53,20 @@ fun ArticleItem(article: Article) {
             Text(text = article.title ?: "", style = MaterialTheme.typography.titleLarge)
 
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Author: ${article.author}", fontSize = 14.sp)
+//            Text(text = "Author: ${article.author}", fontSize = 14.sp)
 
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
             val outputFormat = SimpleDateFormat("dd MMM yyyy, HH:mm a", Locale.getDefault())
             val date: Date? = inputFormat.parse(article.publishedAt)
             val formattedDate: String? = date?.let { outputFormat.format(it) }
 
-            Text(text = "Published At: ${formattedDate}", fontSize = 14.sp)
-            Text(text = "Source: ${article.source.name}", fontSize = 14.sp)
+            Text(text = "${formattedDate}", fontSize = 14.sp)
+//            Text(text = "Source: ${article.source.name}", fontSize = 14.sp)
             Spacer(modifier = Modifier.height(8.dp))
+            Divider(
+                modifier = Modifier.padding(8.dp),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+            )
         }
     }
 }
