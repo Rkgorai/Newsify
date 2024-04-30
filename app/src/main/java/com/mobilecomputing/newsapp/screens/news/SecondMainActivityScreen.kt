@@ -74,8 +74,7 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
                         .padding(7.dp)
                         .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
                         .zIndex(1f)
-                ) {
-                    Icon(Icons.Filled.Favorite, contentDescription = "Favorite", tint = Color.Black)
+                ) { Icon(Icons.Filled.Favorite, contentDescription = "Favorite", tint = Color.Black)
                 }
             }
         )

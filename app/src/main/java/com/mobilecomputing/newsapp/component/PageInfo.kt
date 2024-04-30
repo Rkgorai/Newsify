@@ -153,11 +153,19 @@ fun ArticleItemPage(
                   //Spacer(modifier = Modifier.height(8.dp))
               }
           }
+          Spacer(modifier = Modifier.height(8.dp))
+
           Text(text = "Description:", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
           Text(text ="$description", fontSize = 18.sp)
           Spacer(modifier = Modifier.height(16.dp))
-          Text(text = "Content:", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
-          Text(text = "$content", fontSize = 18.sp)
+            if (content != null) {
+                // Check if content contains HTML tags
+                if (!"<.*?>".toRegex().containsMatchIn(content)) {
+                    Text(text = "Content:", style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold))
+
+                    Text(text = content, fontSize = 18.sp)
+                }
+            }
 
           // Add the link here
           val annotatedString = buildAnnotatedString {
