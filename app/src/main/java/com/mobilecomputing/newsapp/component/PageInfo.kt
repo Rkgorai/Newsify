@@ -92,18 +92,18 @@ fun ArticleItemPage(
                 contentScale = ContentScale.FillBounds
             )
 
-            IconButton(
-                onClick = { activity?.finish() },
-                modifier = Modifier
-                    .padding(7.dp)
-                    .align(Alignment.TopStart)
-                    .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
-                    .zIndex(1f)
-                    .absoluteOffset(y = 0.dp)
-
-            ) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.Black)
-            }
+//            IconButton(
+//                onClick = { activity?.finish() },
+//                modifier = Modifier
+//                    .padding(7.dp)
+//                    .align(Alignment.TopStart)
+//                    .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
+//                    .zIndex(1f)
+//                    .absoluteOffset(y = 0.dp)
+//
+//            ) {
+//                Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.Black)
+//            }
         }
 
 
