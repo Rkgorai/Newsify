@@ -2,6 +2,7 @@ package com.mobilecomputing.newsapp.screens.news
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilecomputing.newsapp.data.DataOrException
@@ -57,3 +58,4 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository) 
         }
     }
 }
+

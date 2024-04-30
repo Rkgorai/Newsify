@@ -1,5 +1,6 @@
 package com.mobilecomputing.newsapp.model.news
 
+
 data class Article(
     val author: String,
     val content: String,

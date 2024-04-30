@@ -17,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +27,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,6 +47,7 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
     val context = LocalContext.current // Get the current context
     val activity = context as? Activity // Safe cast to Activity
 //    val urlToImage = intent.getStringExtra("urlToImage")
+    val isFavorite = remember { mutableStateOf(false) }
 
     // Handle the back button press
     BackHandler {
@@ -69,13 +73,18 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
             },
             actions = { // Add this block
                 IconButton(
-                    onClick = { /* Handle favorite button click here */ },
+                    onClick = {isFavorite.value = !isFavorite.value
+                              /* Handle favorite button click here */ },
                     modifier = Modifier
                         .padding(7.dp)
                         .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
                         .zIndex(1f)
-                ) { Icon(Icons.Filled.Favorite, contentDescription = "Favorite", tint = Color.Black)
-                }
+                ) {
+                    if (isFavorite.value) {
+                        Icon(Icons.Filled.Favorite, contentDescription = "Favorite", tint = Color.Black)
+                    } else {
+                        Icon(Icons.Filled.FavoriteBorder, contentDescription = "Favorite", tint = Color.Black)
+                    }                }
             }
         )
     }

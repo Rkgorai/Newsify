@@ -101,5 +101,18 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation ("io.coil-kt:coil-compose:2.4.0")
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+//    ksp("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.6.1")
+
+
+    implementation ("androidx.compose.runtime:runtime-livedata:1.0.5")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+
 
 }
