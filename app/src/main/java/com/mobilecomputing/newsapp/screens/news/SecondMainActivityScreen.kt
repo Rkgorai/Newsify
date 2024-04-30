@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,31 +50,37 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
         activity?.finish()
     }
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = ""
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                 containerColor = Color.Transparent,
-                ),
-                navigationIcon =  {
-                    IconButton(
-                        onClick = { activity?.finish() },
-                        modifier = Modifier
-                            .padding(7.dp)
-                           // .align(Alignment.CenterVertically)
-                            .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
-                            .zIndex(1f)
-                    ) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.Black)
-                    }
+    topBar = {
+        TopAppBar(
+            title = { Text(text = "") },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Transparent,
+            ),
+            navigationIcon =  {
+                IconButton(
+                    onClick = { activity?.finish() },
+                    modifier = Modifier
+                        .padding(7.dp)
+                        .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
+                        .zIndex(1f)
+                ) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.Black)
                 }
-            )
-        }
-    )
+            },
+            actions = { // Add this block
+                IconButton(
+                    onClick = { /* Handle favorite button click here */ },
+                    modifier = Modifier
+                        .padding(7.dp)
+                        .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
+                        .zIndex(1f)
+                ) {
+                    Icon(Icons.Filled.Favorite, contentDescription = "Favorite", tint = Color.Black)
+                }
+            }
+        )
+    }
+)
     {
 
         Column {
