@@ -12,9 +12,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.room.Room
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
+import com.mobilecomputing.newsapp.database.AppDatabase
 import com.mobilecomputing.newsapp.locationupdates.LocationUpdates
 import com.mobilecomputing.newsapp.screens.locations.LocationHome
 //import com.mobilecomputing.newsapp.screens.LocationHome
@@ -26,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
+    private lateinit var db: AppDatabase
     private lateinit var locationUpdates: LocationUpdates
 
     override fun onResume() {
@@ -44,6 +46,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Accesing the database
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).fallbackToDestructiveMigration().build()
+
+        val dao = db.articleDao()
 
         locationUpdates = LocationUpdates(this)
 
@@ -73,7 +83,7 @@ class MainActivity : ComponentActivity() {
                         LocationHome(currentLocation.latitude.toString(), currentLocation.longitude.toString())
                         if(state_location.value.isNotEmpty()) {
 //                            NewsHome()
-                            MainNewsScreen()
+                            MainNewsScreen(dao)
                         }
 
                     }

@@ -28,10 +28,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mobilecomputing.newsapp.database.ArticleDao
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainNewsScreen() {
+fun MainNewsScreen(dao: ArticleDao) {
     val items = listOf(
     Pair(Icons.Filled.Home, Icons.Outlined.Home) to "Home",
     Pair(Icons.Filled.Search, Icons.Outlined.Search) to "Search",
@@ -77,7 +78,7 @@ val selectedItem = remember { mutableStateOf(items[0].second) }
             when (selectedItem.value) {
                 "Home" -> NewsHome()
                 "Search" -> SearchScreen()
-                "Favourite" -> FavScreen()
+                "Favourite" -> FavScreen(dao)
                 "About Us" -> AboutScreen()
             }
         }
