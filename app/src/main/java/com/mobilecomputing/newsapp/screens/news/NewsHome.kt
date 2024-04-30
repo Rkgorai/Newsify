@@ -139,6 +139,7 @@ fun getArticlesByNewsType(viewModel: NewsViewModel, news: String): List<Article>
         "science" -> viewModel.topHeadlineArticlesScience.value
         "sports" -> viewModel.topHeadlineArticlesSports.value
         "technology" -> viewModel.topHeadlineArticlesTechnology.value
+        "search" -> viewModel.searchedNewsArticles.value
         else -> listOf()
     }
 }
