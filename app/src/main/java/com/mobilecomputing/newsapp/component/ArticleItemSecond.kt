@@ -62,6 +62,7 @@
 
 package com.mobilecomputing.newsapp.component
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -86,12 +87,11 @@ import com.mobilecomputing.newsapp.database.NewsArticle
 @Composable
 fun ArticleItemSecond(articles: List<NewsArticle>) {
     articles.forEach { article ->
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.padding(8.dp),
-            elevation = CardDefaults.elevatedCardElevation(8.dp)
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(8.dp)) {
                 // Add the image here
                 AsyncImage(
                     modifier = Modifier
@@ -106,15 +106,15 @@ fun ArticleItemSecond(articles: List<NewsArticle>) {
                 Text(text = article.title ?: "", style = MaterialTheme.typography.titleLarge)
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Author: ${article.author}", fontSize = 14.sp)
+//                Text(text = "Author: ${article.author}", fontSize = 14.sp)
 
                 val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
                 val outputFormat = SimpleDateFormat("dd MMM yyyy, HH:mm a", Locale.getDefault())
                 val date: Date? = inputFormat.parse(article.publishedAt)
                 val formattedDate: String? = date?.let { outputFormat.format(it) }
 
-                Text(text = "Published At: ${formattedDate}", fontSize = 14.sp)
-                Text(text = "Source: ${article.source}", fontSize = 14.sp)
+                Text(text = "${formattedDate}", fontSize = 14.sp)
+//                Text(text = "Source: ${article.source}", fontSize = 14.sp)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
