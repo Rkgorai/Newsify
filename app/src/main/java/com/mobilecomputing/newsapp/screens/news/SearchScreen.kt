@@ -37,7 +37,7 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
     val startActivityLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
         // Handle the result of the activity here
     }
-    viewModel.localNewsArticles.value = mutableListOf() // Clear the list of news articles
+    viewModel.searchedNewsArticles.value = mutableListOf() // Clear the list of news articles
 
     Column(
         modifier = Modifier
@@ -66,7 +66,7 @@ fun SearchScreen(viewModel: NewsViewModel = hiltViewModel()) {
         }
 
         LazyColumn {
-            items(getArticlesByNewsType(viewModel, "for you")) { article ->
+            items(getArticlesByNewsType(viewModel, "search")) { article ->
                 Box(modifier = Modifier.clickable {
                     // Create an Intent to start the new activity
                     val intent = Intent(context, SecondMainActivity::class.java)
