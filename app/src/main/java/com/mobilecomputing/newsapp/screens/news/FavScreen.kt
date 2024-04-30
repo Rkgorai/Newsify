@@ -28,7 +28,7 @@ fun FavScreen(dao: ArticleDao) {
         Text("No articles found")
     } else {
         LazyColumn {
-            items(articles.value) { article ->
+            items(articles.value.reversed()) { article ->
                 ArticleItemSecond(listOf(article))
             }
         }
