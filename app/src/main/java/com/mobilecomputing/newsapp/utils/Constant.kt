@@ -23,8 +23,8 @@ object Constant {
 
    // const val NEWS_API_KEY = "943ce6b7bb7442d2856a0a335043f422"
 //    const val NEWS_API_KEY= "2b859da6065945fa993fc49d86e68580"
-    const val NEWS_API_KEY = "c666b7325dcb418f8c9f42bb1f8956be"
-//    const val NEWS_API_KEY = "bf480ec6c11144bc835868cc78c04e3b"
+    //const val NEWS_API_KEY = "c666b7325dcb418f8c9f42bb1f8956be"
+    const val NEWS_API_KEY = "bf480ec6c11144bc835868cc78c04e3b"
 
 
     val newsType = mutableStateOf("everything")
