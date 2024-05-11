@@ -103,13 +103,14 @@ fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {
             Column() {
                 ScrollableTabRow(
                     selectedTabIndex = newsTypes.indexOf(selectedTab.value),
+                    edgePadding = 0.dp,
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
                 ) {
                     newsTypes.forEach { newsType ->
                         Tab(
-                            modifier = Modifier.padding(horizontal = 12.dp),
+                            modifier = Modifier.padding(horizontal = 12.dp), // Add padding here
                             selected = selectedTab.value == newsType,
                             onClick = {
                                 selectedTab.value = newsType

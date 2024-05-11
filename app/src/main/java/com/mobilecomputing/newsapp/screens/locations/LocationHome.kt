@@ -29,6 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -86,9 +88,12 @@ fun DisplayLocationData(viewModel: LocationViewModel) {
                 modifier = Modifier.align(Alignment.TopCenter)
                     .padding(top = 160.dp)
                     .alpha(alpha),
+
                 style = MaterialTheme.typography.titleLarge,
                 fontSize = 50.sp,
-                color = Color.Black
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
             )
 
 
@@ -112,9 +117,17 @@ fun GifImage(
             add(ImageDecoderDecoder.Factory())
         }
         .build()
+
+    // Determine which GIF to display based on the theme
+    val gifResource = if (MaterialTheme.colorScheme.primary == Color.White) {
+        R.drawable.opening // Replace with your light theme GIF
+    } else {
+        R.drawable.opening_dark // Replace with your dark theme GIF
+    }
+
     Image(
         painter = rememberAsyncImagePainter(
-            ImageRequest.Builder(context).data(data = R.drawable.opening).apply(block = {
+            ImageRequest.Builder(context).data(data = gifResource).apply(block = {
                 size(Size.ORIGINAL)
             }).build(), imageLoader = imageLoader
         ),

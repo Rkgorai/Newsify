@@ -1,7 +1,9 @@
 package com.mobilecomputing.newsapp.screens.news
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,7 +30,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -39,13 +44,14 @@ import com.mobilecomputing.newsapp.database.ArticleDao
 @Composable
 fun MainNewsScreen(dao: ArticleDao) {
     val items = listOf(
-    Pair(Icons.Filled.Home, Icons.Outlined.Home) to "Home",
-    Pair(Icons.Filled.Search, Icons.Outlined.Search) to "Search",
-    Pair(Icons.Filled.Favorite, Icons.Outlined.FavoriteBorder) to "Favourite",
-    Pair(Icons.Filled.Person, Icons.Outlined.Person) to "About Us"
-)
+        Pair(Icons.Filled.Home, Icons.Outlined.Home) to "Home",
+        Pair(Icons.Filled.Search, Icons.Outlined.Search) to "Search",
+        Pair(Icons.Filled.Favorite, Icons.Outlined.FavoriteBorder) to "Favourite",
+        Pair(Icons.Filled.Person, Icons.Outlined.Person) to "About Us"
+    )
 
-val selectedItem = remember { mutableStateOf(items[0].second) }
+
+    val selectedItem = remember { mutableStateOf(items[0].second) }
 
     Scaffold(
         topBar = {
@@ -65,7 +71,7 @@ val selectedItem = remember { mutableStateOf(items[0].second) }
 
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.height(58.dp),
+                modifier = Modifier,
                 containerColor = MaterialTheme.colorScheme.background,
                 contentColor = MaterialTheme.colorScheme.primary,
             ) {
@@ -76,19 +82,39 @@ val selectedItem = remember { mutableStateOf(items[0].second) }
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     items.forEach { (iconPair, item) ->
-                        IconButton(
-                            onClick = { selectedItem.value = item }
-                        ) {
-                            val icon =
-                                if (selectedItem.value == item) iconPair.first else iconPair.second
-                            Icon(icon, contentDescription = null, modifier = Modifier.size(32.dp))
-//                        Text(item)
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(30.dp)) // Clip the background to have rounded corners
+                                    .background(
+                                        if (selectedItem.value == item) MaterialTheme.colorScheme.onPrimary else Color.Transparent
+                                    )
+                                    .size(40.dp) // Set the size of the Box, and hence the background color
+                            ) {
+                                IconButton(
+                                    onClick = { selectedItem.value = item }
+                                ) {
+                                    val icon =
+                                        if (selectedItem.value == item) iconPair.first else iconPair.second
+                                    Icon(
+                                        icon,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(25.dp)
+                                    )
+                                }
+                            }
+                            Text(
+                                item,
+                                textAlign = TextAlign.Center,
+                                fontSize = 15.sp,
+                                modifier = Modifier.padding(bottom = 5.dp),
+                                fontWeight = if (selectedItem.value == item) FontWeight.Bold else FontWeight.Normal
+                            )
                         }
                     }
                 }
             }
-        }
-    ) { paddingValues ->
+        }) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             when (selectedItem.value) {
                 "Home" -> NewsHome()
