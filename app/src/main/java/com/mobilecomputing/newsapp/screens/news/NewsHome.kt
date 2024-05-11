@@ -154,7 +154,7 @@ fun DisplayNewsData(news: String, viewModel: NewsViewModel=hiltViewModel()) {
 
     }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         if (viewModel.data.value.loading == true) {
             CircularProgressIndicator()
         } else {
