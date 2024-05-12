@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -150,6 +151,25 @@ fun SecondMainActivityScreen(intent: Intent) { // Receive the intent as a parame
                         Icon(Icons.Filled.FavoriteBorder, contentDescription = "Favorite", tint = Color.Black)
                     }
                 }
+                IconButton(
+                    onClick = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, url)
+                            type = "text/plain"
+                        }
+
+                        val shareIntent = Intent.createChooser(sendIntent, null)
+                        context.startActivity(shareIntent)
+                    },
+                    modifier = Modifier
+                        .padding(7.dp)
+                        .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
+                        .zIndex(1f)
+                ) {
+                    Icon(Icons.Filled.Share, contentDescription = "Share", tint = Color.Black)
+                }
+
             }
         )
     }
