@@ -41,6 +41,7 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
 import com.mobilecomputing.newsapp.R
+import com.mobilecomputing.newsapp.utils.Constant.fullAddress
 import com.mobilecomputing.newsapp.utils.Constant.state_location
 import kotlinx.coroutines.delay
 
@@ -105,6 +106,8 @@ fun DisplayLocationData(viewModel: LocationViewModel) {
         showSplashScreen.value = false
         Log.d("RESULT", "DisplayLocationData: $resultsfetched")
         state_location.value = resultsfetched?.get(0)?.state.toString()
+        val locationDataItem = resultsfetched?.get(0)
+        fullAddress.value = "${locationDataItem?.name},\nState: ${locationDataItem?.state},\nCountry: ${locationDataItem?.country}"
     }
 }
 @Composable

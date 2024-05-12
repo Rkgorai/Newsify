@@ -30,4 +30,6 @@ object Constant {
     val newsType = mutableStateOf("everything")
 
     val state_location = mutableStateOf("")
+
+    val fullAddress = mutableStateOf("")
 }

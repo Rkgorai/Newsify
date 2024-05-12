@@ -1,10 +1,12 @@
 package com.mobilecomputing.newsapp.screens.news
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,13 +15,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,7 +44,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.mobilecomputing.newsapp.database.ArticleDao
+import com.mobilecomputing.newsapp.utils.Constant
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,18 +61,23 @@ fun MainNewsScreen(dao: ArticleDao) {
 
     val selectedItem = remember { mutableStateOf(items[0].second) }
 
+    val showDialog = remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = "Newsify",
-                        fontSize = 30.sp,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Row {
+                        Text(
+                            text = "Newsify",
+                            fontSize = 30.sp,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.weight(1f), // Give the Text a weight of 1
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(Icons.Filled.LocationOn, contentDescription = "Location", modifier = Modifier.padding(8.dp).clickable { showDialog.value = true } )
+                    }
                 }
             )
         },
@@ -114,7 +127,9 @@ fun MainNewsScreen(dao: ArticleDao) {
                     }
                 }
             }
-        }) { paddingValues ->
+        }
+    )
+    { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             when (selectedItem.value) {
                 "Home" -> NewsHome()
@@ -123,5 +138,18 @@ fun MainNewsScreen(dao: ArticleDao) {
                 "About Us" -> AboutScreen()
             }
         }
+        if (showDialog.value) {
+            AlertDialog(
+                onDismissRequest = { showDialog.value = false },
+                title = { Text(text = "Location") },
+                text = { Text("Location: ${Constant.fullAddress.value}") },
+                confirmButton = {
+                    Button(onClick = { showDialog.value = false }) {
+                        Text("OK")
+                    }
+                }
+            )
+        }
     }
+
 }

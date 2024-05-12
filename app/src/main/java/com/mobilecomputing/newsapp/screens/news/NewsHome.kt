@@ -39,42 +39,6 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.mobilecomputing.newsapp.SecondMainActivity
 import com.mobilecomputing.newsapp.utils.Constant.state_location
 
-//@Composable
-//fun NewsHome() {
-//    val newsTypes = listOf("for you","general", "entertainment", "health", "science", "sports", "technology")
-//    val selectedTab = remember { mutableStateOf(newsTypes[0]) }
-//
-//    Box(modifier = Modifier.fillMaxSize()) {
-//        Column() {
-//
-//            ScrollableTabRow(
-//                selectedTabIndex = newsTypes.indexOf(selectedTab.value),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .align(Alignment.CenterHorizontally)
-//            ) {
-//                newsTypes.forEach { newsType ->
-//                    Tab(
-//                        modifier = Modifier.padding(horizontal = 12.dp),
-//                        selected = selectedTab.value == newsType,
-//                        onClick = {
-//                            selectedTab.value = newsType
-//                        }
-//                    ) {
-//                        Text(
-//                            text = newsType.toUpperCase(),
-//                            modifier = Modifier.padding(8.dp),
-//                            fontSize = 20.sp
-//                        )
-//                    }
-//                }
-//            }
-//
-//            // Display the news data
-//            DisplayNewsData(selectedTab.value)
-//        }
-//    }
-//}
 
 @Composable
 fun NewsHome(viewModel: NewsViewModel = hiltViewModel()) {

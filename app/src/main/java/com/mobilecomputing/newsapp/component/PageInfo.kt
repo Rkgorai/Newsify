@@ -91,37 +91,11 @@ fun ArticleItemPage(
                 contentDescription = "The delasign logo",
                 contentScale = ContentScale.FillBounds
             )
-
-//            IconButton(
-//                onClick = { activity?.finish() },
-//                modifier = Modifier
-//                    .padding(7.dp)
-//                    .align(Alignment.TopStart)
-//                    .background(Color.White.copy(alpha = 0.6f), shape = CircleShape)
-//                    .zIndex(1f)
-//                    .absoluteOffset(y = 0.dp)
-//
-//            ) {
-//                Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.Black)
-//            }
         }
 
 
 
         Spacer(modifier = Modifier.height(8.dp))
-//        Text(text = title ?: "", style = MaterialTheme.typography.headlineLarge)
-//
-//        Spacer(modifier = Modifier.height(16.dp))
-//        Text(text = "Author: $author", fontSize = 16.sp)
-//
-//        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-//        val outputFormat = SimpleDateFormat("dd MMM yyyy, HH:mm a", Locale.getDefault())
-//        val date: Date? = publishedAt?.let { inputFormat.parse(it) }
-//        val formattedDate: String? = date?.let { outputFormat.format(it) }
-//
-//        Text(text = "Published At: $formattedDate", fontSize = 16.sp)
-//        Text(text = "Source: $source", fontSize = 16.sp)
-      //  Spacer(modifier = Modifier.height(8.dp))
       Column(modifier = Modifier.padding(16.dp)) {
 
           Box(
@@ -149,8 +123,6 @@ fun ArticleItemPage(
 
                       Text(text = "$formattedDate", fontSize = 14.sp, modifier = Modifier.weight(1f), textAlign = TextAlign.End)
                   }
-//                Text(text = "Source: $source", fontSize = 14.sp)
-                  //Spacer(modifier = Modifier.height(8.dp))
               }
           }
           Spacer(modifier = Modifier.height(16.dp))

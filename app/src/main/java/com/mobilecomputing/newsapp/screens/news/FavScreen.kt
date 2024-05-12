@@ -119,14 +119,6 @@ fun NewScreen() {
                     .clip(CircleShape))
 
             Spacer(modifier = Modifier.padding(20.dp))
-//            Text(text = "You can find this whole source code on",
-//                fontSize = 13.sp)
-//            Text(text = "github.com/Rkgorai/NewsApp",
-//                style = MaterialTheme.typography.titleMedium,
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 16.sp,
-//
-//                )
 
             Text(text = "THERE ARE NO FAVOURITE NEWS ARTICLES OF YOURS",
                 style = MaterialTheme.typography.titleLarge,
