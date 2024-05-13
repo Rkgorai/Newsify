@@ -125,7 +125,7 @@ fun GifImage(
     val gifResource = if (MaterialTheme.colorScheme.primary == Color.White) {
         R.drawable.opening // Replace with your light theme GIF
     } else {
-        R.drawable.sharingan// Replace with your dark theme GIF
+        R.drawable.opening_dark// Replace with your dark theme GIF
     }
 
     Image(
