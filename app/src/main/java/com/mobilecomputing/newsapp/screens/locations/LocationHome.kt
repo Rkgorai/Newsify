@@ -1,5 +1,7 @@
 package com.mobilecomputing.newsapp.screens.locations
 
+import androidx.compose.material3.darkColorScheme
+
 import android.os.Build
 import android.util.Log
 import androidx.compose.animation.AnimatedContent
@@ -12,6 +14,7 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -87,7 +90,7 @@ fun DisplayLocationData(viewModel: LocationViewModel) {
             Text(
                 text = targetState,
                 modifier = Modifier.align(Alignment.TopCenter)
-                    .padding(top = 160.dp)
+                    .padding(top = 140.dp)
                     .alpha(alpha),
 
                 style = MaterialTheme.typography.titleLarge,
@@ -122,10 +125,11 @@ fun GifImage(
         .build()
 
     // Determine which GIF to display based on the theme
-    val gifResource = if (MaterialTheme.colorScheme.primary == Color.White) {
-        R.drawable.opening // Replace with your light theme GIF
+    val gifResource = if (isSystemInDarkTheme()) {
+
+        R.drawable.loading // Replace with your dark theme GIF
     } else {
-        R.drawable.opening_dark// Replace with your dark theme GIF
+        R.drawable.loading // Replace with your light theme GIF
     }
 
     Image(
